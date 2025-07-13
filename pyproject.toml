@@ -163,3 +163,8 @@ push            = false
 # This means that uv users who want to use equivariant models must install dependencies
 # in two steps: `uv sync`, then `uv sync --extra equiv`.
 no-build-isolation-package = ["lie_learn"]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+]

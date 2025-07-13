@@ -130,12 +130,14 @@ class MultiTaskIm2Im(BaseModel):
         to run backbone + taskheads patch by patch, then do saving/postprocessing/etc on the entire
         fov.
         """
+        inference_args = self.hparams.inference_args.copy()
+        inference_args["progress"] = sys.stdout.isatty()
         with torch.no_grad():
             raw_pred_images = sliding_window_inference(
                 inputs=batch[self.hparams.x_key],
                 predictor=self.forward,
                 run_heads=run_heads,
-                **self.hparams.inference_args,
+                **inference_args
             )
         return {
             head_name: self.task_heads[head_name].run_head(

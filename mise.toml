@@ -1,0 +1,7 @@
+[tasks.install]
+run = """
+    uv sync && \
+    uv pip sync requirements/requirements.txt && \
+    uv pip install ipywidgets ipykernel && \
+    uv run ipython kernel install --user --env VIRTUAL_ENV $(pwd)/.venv --name=cyto_dl
+"""
